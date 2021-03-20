@@ -1,1 +1,14 @@
-{"presets":["@babel/preset-env","@babel/preset-flow"]}
+{
+  "presets": [
+    ["@babel/preset-env", { "modules": false }],
+    "@babel/preset-flow"
+  ],
+  "env": {
+    "cjs": {
+      "presets": [["@babel/preset-env", { "targets": { "node": 10 } }]]
+    },
+    "test": {
+      "presets": [["@babel/preset-env", { "targets": { "node": "current" } }]]
+    }
+  }
+}

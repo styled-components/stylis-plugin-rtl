@@ -2,10 +2,16 @@
   "name": "stylis-plugin-rtl",
   "version": "2.0.2",
   "description": "Fork of stylis-rtl, uses cssjanus under the hood to flip style orientations for RTL",
-  "main": "dist/stylis-rtl.js",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "main": "dist/stylis-rtl.cjs.js",
+  "module": "dist/stylis-rtl.esm.js",
   "types": "types/stylis-rtl.d.ts",
   "scripts": {
-    "build": "babel src --out-dir dist --ignore 'src/**/*.test.js'",
+    "build": "rimraf dist && npm run build:esm && npm run build:cjs",
+    "build:esm": "babel src/ --out-dir dist --ignore \"src/*.test.js\" --out-file-extension .esm.js",
+    "build:cjs": "babel src/ --out-dir dist --ignore \"src/*.test.js\" --out-file-extension .cjs.js --env-name cjs",
     "flow": "flow check",
     "prepublish": "npm run build",
     "test": "jest"
@@ -41,16 +47,16 @@
     "stylis": "4.x"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-flow": "^7.0.0",
-    "babel-core": "^7.0.0-bridge.0",
+    "@babel/cli": "^7.11.5",
+    "@babel/core": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-flow": "^7.10.4",
     "babel-jest": "^26.3.0",
     "flow-bin": "^0.132.0",
     "flow-typed": "^3.2.1",
     "jest": "^26.4.2",
     "prettier": "^2.1.1",
+    "rimraf": "^3.0.2",
     "stylis": "^4.0.2"
   },
   "dependencies": {
